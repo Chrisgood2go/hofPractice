@@ -25,6 +25,7 @@ var multiplesOfFive = function(numbers) {
   var numOfMultiples = 0;
 
   _.each(numbers, function(value) {
+
     if (value % 5 === 0) {
       numOfMultiples += 1;
     }
@@ -41,7 +42,9 @@ var multiplesOfFive = function(numbers) {
 
 // use _.filter to return the fruits array with only the desired fruit.
 var onlyOneFruit = function(fruits, targetFruit) {
+
   return _.filter(fruits, function(fruit) {
+
     return fruit === targetFruit;
   });
 };
@@ -51,6 +54,7 @@ var onlyOneFruit = function(fruits, targetFruit) {
 var startsWith = function(fruits, letter) {
 
   return _.filter(fruits, function(fruit) {
+
     return fruit[0] === letter;
   });
 
@@ -58,7 +62,9 @@ var startsWith = function(fruits, letter) {
 
 // return a filtered array containing only cookie-type desserts.
 var cookiesOnly = function(desserts) {
+
   return _.filter(desserts, function(dessert) {
+
     return dessert['type'] === 'cookie';
   });
 };
@@ -110,6 +116,7 @@ var ninetiesKid = function(movies) {
   return _.reduce( movies, function(memo, movie) {
     var year = movie['releaseYear'];
     var title = movie['title'];
+
     if (year >= 1990 && year <= 2000) {
       memo.push(title);
     }
@@ -122,7 +129,9 @@ var ninetiesKid = function(movies) {
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
+
   return _.reduce(movies, function(memo, movie) {
+
     if (memo === false) {
       movie['runtime'] < timeLimit ? memo = true : memo;
     }
@@ -140,7 +149,9 @@ var movieNight = function(movies, timeLimit) {
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
 var upperCaseFruits = function(fruits) {
+
   return _.map(fruits, function(fruit) {
+
     return fruit.toUpperCase();
   });
 };
@@ -151,8 +162,10 @@ var upperCaseFruits = function(fruits) {
 var glutenFree = function(desserts) {
 
   return _.map(desserts, function(dessert) {
+
     dessert['ingredients'].indexOf('flour') > -1 ?
     dessert['glutenFree'] = true : dessert['glutenFree'] = false;
+
     return dessert;
   });
 };
