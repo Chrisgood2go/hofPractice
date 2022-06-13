@@ -1,6 +1,6 @@
 // This repo is optional extra practice to use the underscore functions.
-// Here we'll be writing new functions, but these functions will use 
-// the underscore functions within them. 
+// Here we'll be writing new functions, but these functions will use
+// the underscore functions within them.
 
 /*
  *
@@ -22,7 +22,15 @@ var moreFruits = function(fruits) {
 // use _.each to traverse the number array and determine
 // which are multiples of five.
 var multiplesOfFive = function(numbers) {
+  var numOfMultiples = 0;
 
+  _.each(numbers, function(value) {
+    if (value % 5 === 0) {
+      numOfMultiples += 1;
+    }
+  });
+
+  return numOfMultiples;
 };
 
 /*
@@ -33,18 +41,26 @@ var multiplesOfFive = function(numbers) {
 
 // use _.filter to return the fruits array with only the desired fruit.
 var onlyOneFruit = function(fruits, targetFruit) {
-
+  return _.filter(fruits, function(fruit) {
+    return fruit === targetFruit;
+  });
 };
 
 // use _.filter to return the fruits array with only fruits
 // starting with the letter 'P'.
 var startsWith = function(fruits, letter) {
 
+  return _.filter(fruits, function(fruit) {
+    return fruit[0] === letter;
+  });
+
 };
 
 // return a filtered array containing only cookie-type desserts.
 var cookiesOnly = function(desserts) {
-
+  return _.filter(desserts, function(dessert) {
+    return dessert['type'] === 'cookie';
+  });
 };
 
 /*
@@ -55,7 +71,7 @@ var cookiesOnly = function(desserts) {
 
 // return the total price of all products.
 var sumTotal = function(products) {
-  
+
 };
 
 // return an object consisting of dessert types and how many of each.
@@ -68,7 +84,7 @@ var dessertCategories = function(desserts) {
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function(movies) {
-  
+
 };
 
 // return an boolean stating if there exists a movie with a shorter
@@ -87,7 +103,9 @@ var movieNight = function(movies, timeLimit) {
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
 var upperCaseFruits = function(fruits) {
-
+  return _.map(fruits, function(fruit) {
+    return fruit.toUpperCase();
+  });
 };
 
 // given an array of dessert objects, return a new array of objects
@@ -95,6 +113,11 @@ var upperCaseFruits = function(fruits) {
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function(desserts) {
 
+  return _.map(desserts, function(dessert) {
+    dessert['ingredients'].indexOf('flour') > -1 ?
+    dessert['glutenFree'] = true : dessert['glutenFree'] = false;
+    return dessert;
+  });
 };
 
 // use _.map to return an array of items with their sale prices, with a new property
@@ -102,7 +125,7 @@ var glutenFree = function(desserts) {
 //
 // having trouble with decimals? check out this article:
 // http://adripofjavascript.com/blog/drips/avoiding-problems-with-decimal-math-in-javascript.html
-// 
+//
 /*
 
  example output:
@@ -111,7 +134,7 @@ var glutenFree = function(desserts) {
     {
       id: 1,
       product: 'Olive Oil',
-      price: '$12.1', 
+      price: '$12.1',
       salePrice: '$9.68'
     }
   ];
@@ -119,4 +142,12 @@ var glutenFree = function(desserts) {
 */
 var applyCoupon = function(groceries, coupon) {
 
+  _.map(groceries, function(item) {
+    var price = Number(item['price'].slice(1, item['price'].length));
+    var discount = price * coupon;
+    item['salePrice'] = '$' + (price - discount).toString().slice(0, 4);
+  });
+
+  return groceries;
 };
+
