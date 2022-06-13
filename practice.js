@@ -72,26 +72,63 @@ var cookiesOnly = function(desserts) {
 // return the total price of all products.
 var sumTotal = function(products) {
 
+  return _.reduce(products, function(memo, value) {
+    var currentPriceNumber = Number(value['price'].slice(1, value['price'].length));
+    var total = memo + currentPriceNumber;
+
+    return total;
+  }, 0);
 };
 
 // return an object consisting of dessert types and how many of each.
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
+//I: an array of dessert objects with a type key
+//O: look at example output.
+//C: use _.reduce.
+  //parameters: desserts array,
+             // function
+                //parameters: memo (accumulator), value (object rep dessert), starting value of memo
+//E: im not sure
+//STRATEGY: use reduce and have if type not found in memo type as key to memo, if in memo add value
 var dessertCategories = function(desserts) {
 
+  return _.reduce(desserts, function(memo, value) {
+    var type = value['type'];
+
+    memo[type] === undefined ? memo[type] = 1 : memo[type] ++;
+
+    return memo;
+  }, {});
 };
 
 // given an array of movie data objects,return an array containing
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
-var ninetiesKid = function(movies) {
 
+var ninetiesKid = function(movies) {
+//key is releaseYear
+  return _.reduce( movies, function(memo, movie) {
+    var year = movie['releaseYear'];
+    var title = movie['title'];
+    if (year >= 1990 && year <= 2000) {
+      memo.push(title);
+    }
+
+    return memo;
+  }, []);
 };
 
 // return an boolean stating if there exists a movie with a shorter
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
+  return _.reduce(movies, function(memo, movie) {
+    if (memo === false) {
+      movie['runtime'] < timeLimit ? memo = true : memo;
+    }
 
+    return memo;
+  }, false);
 };
 
 /*
